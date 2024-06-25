@@ -31,6 +31,7 @@ public class Principal {
         funcionarios.removeIf(funcionario -> funcionario.getNome().equals("João"));
 
         // 3.3 - Imprimir todos os funcionários com todas suas informações
+    	System.out.println("Lista de todos os funcionários e suas informações.");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         funcionarios.forEach(funcionario -> {
             System.out.println("Nome: " + funcionario.getNome());
@@ -50,6 +51,7 @@ public class Principal {
         Map<String, List<Funcionario>> funcionariosPorFuncao = funcionarios.stream().collect(Collectors.groupingBy(Funcionario::getFuncao));
 
         // 3.6 - Imprimir os funcionários agrupados por função
+    	System.out.println("Lista dos funcionários agrupados por função e alterações 3.4 e 3.5 aplicadas:");
         funcionariosPorFuncao.forEach((funcao, listaFuncionarios) -> {
             System.out.println("Função: " + funcao);
             listaFuncionarios.forEach(funcionario -> {
@@ -76,6 +78,7 @@ public class Principal {
         System.out.println("Funcionário com a maior idade:");
         System.out.println("Nome: " + maisVelho.getNome());
         System.out.println("Idade: " + (LocalDate.now().getYear() - maisVelho.getDataNascimento().getYear()) + " anos");
+        System.out.println();
 
         // 3.10 - Imprimir a lista de funcionários por ordem alfabética
         System.out.println("Funcionários em ordem alfabética:");
@@ -84,10 +87,13 @@ public class Principal {
         });
 
         // 3.11 - Imprimir o total dos salários dos funcionários
+        System.out.println();
         BigDecimal totalSalarios = funcionarios.stream().map(Funcionario::getSalario).reduce(BigDecimal.ZERO, BigDecimal::add);
         System.out.println("Total dos salários: " + totalSalarios.setScale(2, BigDecimal.ROUND_HALF_EVEN).toString().replace(".", ","));
+        System.out.println();
 
         // 3.12 - Imprimir quantos salários mínimos ganha cada funcionário
+        System.out.println("Lista da quantidade de salários mínimos ganha cada funcionário:");
         BigDecimal salarioMinimo = new BigDecimal("1212.00");
         funcionarios.forEach(funcionario -> {
             BigDecimal qtdSalariosMinimos = funcionario.getSalario().divide(salarioMinimo, 2, BigDecimal.ROUND_HALF_EVEN);
